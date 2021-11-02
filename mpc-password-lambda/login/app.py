@@ -2,7 +2,7 @@ import json
 import sys
 import requests
 import asyncio
-import  pickle
+import pickle
 
 # https://pypi.org/project/nest-asyncio/
 # pip install nest-asyncio
@@ -14,7 +14,11 @@ nest_asyncio.apply() # https://pypi.org/project/nest-asyncio/
 
 stored_password = "e&t.C_^q2RFrP%"
 
+# save the pickled encrypted password on the lambda temp file system
+# https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html
+# Each execution environment provides 512 MB of disk space in the /tmp directory.
 encrypted_password_file_path = "/tmp/encrypted_password.txt"
+
 
 secint = mpc.SecInt()
 
@@ -39,15 +43,23 @@ async def main(password):
 
     # ######## PICKLE  ###########
 
-    encrypted_password_file = open(encrypted_password_file_path, 'wb')
-    pickle.dump(encrypted_password_obj, encrypted_password_file)
-    encrypted_password_file.close()
+    # ### with file ###
+    # -----------------
+    # encrypted_password_file = open(encrypted_password_file_path, 'wb')
+    # pickle.dump(encrypted_password_obj, encrypted_password_file)
+    # encrypted_password_file.close()
 
-    encrypted_password_file = open(encrypted_password_file_path, 'rb')
-    encrypted_password = pickle.load(encrypted_password_file)
+    # encrypted_password_file = open(encrypted_password_file_path, 'rb')
+    # encrypted_password = pickle.load(encrypted_password_file)
 
-    print ("encrypted_password : ", encrypted_password)
-    encrypted_password_file.close()
+    # print ("encrypted_password : ", encrypted_password)
+    # encrypted_password_file.close()
+
+    # ### No file ###
+    # ---------------
+    encrypted_password_bytes_sequence = pickle.dumps(encrypted_password_obj)
+
+    encrypted_password = pickle.loads(encrypted_password_bytes_sequence)
 
     # ############################
 
