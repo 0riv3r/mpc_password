@@ -53,8 +53,12 @@ if __name__ == "__main__":
     asyncio.run(main())
 
 # run
-# python password.py "e&t.C_^q2RFrP%"
-# python password.py "+C%pzA9tM8zJ3r"  
+# python password.py "e&t.C_^q2RFrP%"  --> url encoding: e%26t.C_%5Eq2RFrP%25
+# python password.py "+C%pzA9tM8zJ3r"  --> url encoding: %2BC%25pzA9tM8zJ3r
+
+# urls:
+# https://pngowbrq8k.execute-api.eu-west-1.amazonaws.com/dev/signin/?password=e%26t.C_%5Eq2RFrP%25
+# https://pngowbrq8k.execute-api.eu-west-1.amazonaws.com/dev/signin/?password=%2BC%25pzA9tM8zJ3r
 
 
 # resources

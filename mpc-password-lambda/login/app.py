@@ -25,7 +25,18 @@ def lambda_handler(event, context):
         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
     """
 
-    password = event['password']
+    # print(f"event: {event}")
+    # print()
+    # print(f"event['queryStringParameters']: {event['queryStringParameters']['password']}")
+    # print()
+    # print(f"event['password']: {event['password']}")
+    # password = event['password']
+
+    password = ''
+    try:
+        password = event['password']
+    except KeyError:
+        password = event['queryStringParameters']['password']
 
     return {
         "statusCode": 200,
