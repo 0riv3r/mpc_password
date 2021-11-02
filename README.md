@@ -106,6 +106,10 @@ In browser: http://127.0.0.1:3000/signin/?password=%2BC%25pzA9tM8zJ3r
 
 # Lambda endpoint
 
+Browser:  
 https://pngowbrq8k.execute-api.eu-west-1.amazonaws.com/dev/signin/?password=%2BC%25pzA9tM8zJ3r
+
+CLI:  
+curl -X GET https://pngowbrq8k.execute-api.eu-west-1.amazonaws.com/dev/signin\?password=123
 
 
