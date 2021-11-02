@@ -30,7 +30,7 @@ async def main():
         password = "password123"
         # print(f'Setting input to default: {password}')
 
-    stored_password = "e&t.C_\q2RFrP%"
+    stored_password = "e&t.C_^q2RFrP%"
 
     encoded_stored_password = await encode_to_int(stored_password)
     encoded_password = await encode_to_int(password)
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 
 # run
-# python password.py "e&t.C_\q2RFrP%"
+# python password.py "e&t.C_^q2RFrP%"
 # python password.py "+C%pzA9tM8zJ3r"  
 
 
