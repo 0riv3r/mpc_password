@@ -17,7 +17,7 @@ stored_password = "e&t.C_^q2RFrP%"
 # save the pickled encrypted password on the lambda temp file system
 # https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html
 # Each execution environment provides 512 MB of disk space in the /tmp directory.
-encrypted_password_file_path = "/tmp/encrypted_password.txt"
+encrypted_password_file_path = "/tmp/encrypted_password.pkl"
 
 
 secint = mpc.SecInt()

@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # ofer additions
-encrypted_password.txt
+encrypted_password.pkl
