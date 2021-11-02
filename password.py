@@ -1,5 +1,6 @@
 import asyncio
 import sys
+import  pickle
 
 # https://pypi.org/project/nest-asyncio/
 # pip install nest-asyncio
@@ -38,7 +39,21 @@ async def main():
 
     # x and y are secret integers
     encrypted_stored_password = secint(encoded_stored_password)
-    encrypted_password = secint(encoded_password)
+    encrypted_password_obj = secint(encoded_password)
+
+    # ######## PICKLE  ###########
+
+    encrypted_password_file = open("encrypted_password.txt", 'wb')
+    pickle.dump(encrypted_password_obj, encrypted_password_file)
+    encrypted_password_file.close()
+
+    encrypted_password_file = open("encrypted_password.txt", 'rb')
+    encrypted_password = pickle.load(encrypted_password_file)
+
+    print ("encrypted_password : ", encrypted_password)
+    encrypted_password_file.close()
+
+    # ############################
 
     # print("is {} equal {} ?".format(
     #     mpc.run(mpc.output(encrypted_stored_password)),mpc.run(mpc.output(encrypted_password))))
