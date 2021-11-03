@@ -3,6 +3,7 @@ import sys
 import requests
 import asyncio
 import pickle
+import codecs
 
 # https://pypi.org/project/nest-asyncio/
 # pip install nest-asyncio
@@ -32,40 +33,33 @@ async def encode_to_int(text):
     # recoveredstring = recoveredbytes[:-1].decode('utf-8') # Strip pad before decoding
     # print(recoveredstring)
 
-async def main(password):
+async def main(encrypted_password_bytes_sequence):
     res = ''
     encoded_stored_password = await encode_to_int(stored_password)
-    encoded_password = await encode_to_int(password)
 
     # secret integers
     encrypted_stored_password = secint(encoded_stored_password)
-    encrypted_password_obj = secint(encoded_password)
 
     # ######## PICKLE  ###########
+    # Load the encrypted password base64 encoded bytearray into pickle to re-construct the object
+    # encrypted_password_bytes_sequence = "gASVmAAAAAAAAACMDW1weWMuc2VjdHlwZXOUjAhTZWNJbnQzMpSTlCmBlE59lIwFc2hhcmWUjA5tcHljLmZpbmZpZWxkc5SMGlByaW1lRmllbGRFbGVtZW50LmNyZWF0ZUdGlJOUKIoJYwAAAAAAAIAASwBLAooJYgAAAAAAAIAAdJRSlE59lIwFdmFsdWWUigi5kxDMCoN7cHOGlGJzhpRiLg=="
+    encrypted_password = pickle.loads(codecs.decode(encrypted_password_bytes_sequence.encode(), "base64"))
+        
 
     # ### with file ###
     # -----------------
     # encrypted_password_file = open(encrypted_password_file_path, 'wb')
     # pickle.dump(encrypted_password_obj, encrypted_password_file)
     # encrypted_password_file.close()
-
     # encrypted_password_file = open(encrypted_password_file_path, 'rb')
     # encrypted_password = pickle.load(encrypted_password_file)
-
     # print ("encrypted_password : ", encrypted_password)
     # encrypted_password_file.close()
 
-    # ### No file ###
-    # ---------------
-    encrypted_password_bytes_sequence = pickle.dumps(encrypted_password_obj)
 
-    encrypted_password = pickle.loads(encrypted_password_bytes_sequence)
-
-    # ############################
-
-    # print("is {} equal {} ?".format(
-    #     mpc.run(mpc.output(encrypted_stored_password)),mpc.run(mpc.output(encrypted_password))))
-
+    ###   MPC   ###
+    ###         ###
+    ### Check if the encrypted passwords are equal without decrypting them
     if(mpc.run(mpc.output(encrypted_stored_password == encrypted_password))):
         res = "Login succeed"
     else:

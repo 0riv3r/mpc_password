@@ -12,6 +12,7 @@ Download the files from: https://pypi.org/project/mpyc/#files
         conda install -c conda-forge lifelines
         conda list scikit-learn
         conda install -c anaconda scikit-learn
+        conda install -c anaconda requests
         cd mpyc-0.7
         python setup.py install
         cd ..
@@ -100,6 +101,9 @@ In a second Terminal, run:
 
                 curl http://127.0.0.1:3000/signin\?password=e%26t.C_%5Eq2RFrP%25
 
+                curl http://127.0.0.1:3000/signin\?password\=gASVmAAAAAAAAACMDW1weWMuc2VjdHlwZXOUjAhTZWNJbnQzMpSTlCmBlE59lIwFc2hhcmWUjA5tcHljLmZpbmZpZWxkc5SMGlByaW1lRmllbGRFbGVtZW50LmNyZWF0ZUdGlJOUKIoJYwAAAAAAAIAASwBLAooJYgAAAAAAAIAAdJRSlE59lIwFdmFsdWWUigi5kxDMCoN7cHOGlGJzhpRiLg==
+                {"message": "login response: Login succeed"}%             
+
         
 In browser: http://127.0.0.1:3000/signin/?password=%2BC%25pzA9tM8zJ3r  
 
@@ -113,3 +117,10 @@ CLI:
 curl -X GET https://pngowbrq8k.execute-api.eu-west-1.amazonaws.com/dev/signin\?password=123
 
 
+
+### pickle/unpickle output:  
+                ❯ python password.py "e&t.C_^q2RFrP%"
+                encrypted_password_obj :  <mpyc.sectypes.SecInt32 object at 0x10db60970>
+                encrypted_password_bytes_sequence :  b'\x80\x04\x95\x98\x00\x00\x00\x00\x00\x00\x00\x8c\rmpyc.sectypes\x94\x8c\x08SecInt32\x94\x93\x94)\x81\x94N}\x94\x8c\x05share\x94\x8c\x0empyc.finfields\x94\x8c\x1aPrimeFieldElement.createGF\x94\x93\x94(\x8a\tc\x00\x00\x00\x00\x00\x00\x80\x00K\x00K\x02\x8a\tb\x00\x00\x00\x00\x00\x00\x80\x00t\x94R\x94N}\x94\x8c\x05value\x94\x8a\x08\xb9\x93\x10\xcc\n\x83{ps\x86\x94bs\x86\x94b.'
+                encrypted_password :  <mpyc.sectypes.SecInt32 object at 0x10db605e0>
+                Login succeed!
